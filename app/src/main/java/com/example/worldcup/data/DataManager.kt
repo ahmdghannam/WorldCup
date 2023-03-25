@@ -4,6 +4,10 @@ import com.example.worldcup.data.domain.Match
 
 object DataManager {
     private val matchesList = mutableListOf<Match>()
+
+    val matches: List<Match>
+        get() = matchesList
+
     private var matchIndex = 0
     fun addMatch(match: Match) {
         matchesList.add(match)

@@ -10,7 +10,7 @@ import com.example.worldcup.data.domain.Match
 import com.example.worldcup.databinding.ItemMatchBinding
 
 
-class MatchAdapter(val list: List<Match>, val listener: MatchInteractionListener) :
+class MatchAdapter(private var list: List<Match>, private val listener: MatchInteractionListener) :
     RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
@@ -30,6 +30,11 @@ class MatchAdapter(val list: List<Match>, val listener: MatchInteractionListener
             tvAwayTeam.setOnClickListener { listener.onClickTeamName(currentMatch.awayTeamName) }
             root.setOnClickListener { listener.onClickItem(currentMatch) }
         }
+    }
+
+    fun setData(newList: List<Match>) {
+        list = newList
+        notifyDataSetChanged()
     }
 
     override fun getItemCount() = list.size

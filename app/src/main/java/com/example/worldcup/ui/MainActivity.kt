@@ -1,6 +1,7 @@
 package com.example.worldcup.ui
 
 import android.content.Intent
+import android.provider.ContactsContract.Data
 import android.view.LayoutInflater
 import android.widget.Toast
 import com.example.worldcup.data.DataManager
@@ -17,14 +18,33 @@ class MainActivity : BaseActivity<ActivityMainBinding>() ,MatchInteractionListen
         ActivityMainBinding::inflate
     override val LOG_TAG: String = "MAIN_ACTIVITY"
 
+    private lateinit var adapter: MatchAdapter
     override fun setup() {
         parseFile()
-        val adapter = MatchAdapter(DataManager.matches.reversed(),this)
+         adapter = MatchAdapter(DataManager.matches,this)
         binding?.recyclerMatch?.adapter = adapter
     }
 
     override fun addCallBacks() {
+        binding?.fab?.setOnClickListener {
+             addFinalMatch()
+        }
 
+    }
+
+    private fun addFinalMatch() {
+        val finalMatch=Match(
+            year = 2022,
+            stadium = "Lusail",
+            city = "doha",
+            homeTeamName = "argentina",
+            awayTeamName = "france",
+            homeTeamGoals = 3,
+            awayTeamGoals = 3,
+            refereeName = "mamdoh"
+        )
+        DataManager.addMatch(finalMatch)
+        adapter.setData(DataManager.matches)
     }
 
     private fun parseFile() {

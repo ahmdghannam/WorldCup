@@ -3,13 +3,15 @@ package com.example.worldcup.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.worldcup.R
 import com.example.worldcup.data.domain.Match
 import com.example.worldcup.databinding.ItemMatchBinding
 
-class MatchAdapter(val list: List<Match>) : RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
+
+class MatchAdapter(val list: List<Match>, val listener: MatchInteractionListener) :
+    RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_match, parent, false)
@@ -24,19 +26,9 @@ class MatchAdapter(val list: List<Match>) : RecyclerView.Adapter<MatchAdapter.Ma
             tvHomeGoals.text = currentMatch.homeTeamGoals.toString()
             tvAwayGoals.text = currentMatch.awayTeamGoals.toString()
             tvYear.text = currentMatch.year.toString()
-            if (currentMatch.homeTeamGoals > currentMatch.awayTeamGoals) {
-                tvHomeGoals.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.green))
-                tvAwayGoals.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.country_color))
-            }
-            else if (currentMatch.homeTeamGoals < currentMatch.awayTeamGoals){
-                tvHomeGoals.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.country_color))
-                tvAwayGoals.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.green))
-            }
-            else{
-                tvHomeGoals.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.country_color))
-                tvAwayGoals.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.country_color))
-            }
-
+            tvHomeTeam.setOnClickListener { listener.onClickTeamName(currentMatch.homeTeamName) }
+            tvAwayTeam.setOnClickListener { listener.onClickTeamName(currentMatch.awayTeamName) }
+            root.setOnClickListener { listener.onClickItem(currentMatch) }
         }
     }
 

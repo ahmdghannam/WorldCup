@@ -1,5 +1,7 @@
 package com.example.worldcup.util
 
+import android.service.autofill.FieldClassification.Match
+
 object Constants {
     object ColumnIndex{
         const val YEAR=0
@@ -10,5 +12,8 @@ object Constants {
         const val HOME_TEAM_GOALS=6
         const val AWAY_TEAM_GOALS=7
         const val REFEREE_NAME=13
+    }
+    object Key{
+        const val Match ="MATCH"
     }
 }

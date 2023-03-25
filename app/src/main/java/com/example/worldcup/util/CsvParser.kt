@@ -13,7 +13,7 @@ class CsvParser {
             awayTeamName = tokens[Constants.ColumnIndex.AWAY_TEAM_NAME],
             homeTeamGoals = tokens[Constants.ColumnIndex.HOME_TEAM_GOALS].toInt(),
             awayTeamGoals = tokens[Constants.ColumnIndex.AWAY_TEAM_GOALS].toInt(),
-            refereeName = tokens[Constants.ColumnIndex.REFEREE_NAME]
+            refereeName = "mas3od"
         )
     }
 }

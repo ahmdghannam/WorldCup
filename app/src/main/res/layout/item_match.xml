@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/margin_small"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            tools:text="2010"
+            android:textColor="@color/country_color"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_team" />
+
+
+        <TextView
+            android:id="@+id/tv_home_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Brazil"
+            android:lines="1"
+            android:ellipsize="end"
+            android:textSize="24sp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_home_goals"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_home_goals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="0"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_home_team"
+            app:layout_constraintEnd_toStartOf="@+id/tv_dash"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_home_team"
+            app:layout_constraintTop_toTopOf="@+id/tv_home_team" />
+
+        <TextView
+            android:id="@+id/tv_dash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textColor="@color/black"
+
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_away_goals"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_home_goals"
+            app:layout_constraintTop_toTopOf="@+id/tv_home_goals" />
+
+        <TextView
+            android:id="@+id/tv_away_goals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="7"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_away_team"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_dash"
+            app:layout_constraintTop_toTopOf="@+id/tv_dash" />
+
+        <TextView
+            android:id="@+id/tv_away_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Germany"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/country_color"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_away_goals"
+            app:layout_constraintTop_toTopOf="@+id/tv_home_team" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

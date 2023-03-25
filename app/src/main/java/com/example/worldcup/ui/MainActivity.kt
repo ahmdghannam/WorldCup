@@ -17,6 +17,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun setup() {
         parseFile()
+        val adapter = MatchAdapter(DataManager.matches.reversed())
+        binding?.recyclerMatch?.adapter = adapter
+    }
+
+    override fun addCallBacks() {
+
     }
 
     private fun parseFile() {
@@ -27,29 +33,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             val currentMatch = parser.parse(it)
             DataManager.addMatch(currentMatch)
         }
-        bindMatch(DataManager.getCurrentMatch())
     }
 
-    override fun addCallBacks() {
-        binding?.apply {
-            ivNext.setOnClickListener {
-                bindMatch(DataManager.getNextMatch())
-            }
-            ivBack.setOnClickListener {
-                bindMatch(DataManager.getPreviousMatch())
-            }
-        }
-    }
-
-    private fun bindMatch(match: Match) {
-        binding?.apply {
-            tvYear.text = match.year.toString()
-            tvHomeTeam.text = match.homeTeamName
-            tvAwayTeam.text = match.awayTeamName
-            tvHomeGoals.text = match.homeTeamGoals.toString()
-            tvAwayGoals.text = match.awayTeamGoals.toString()
-            tvStadium.text = match.stadium
-
-        }
-    }
 }
+
+
+
+

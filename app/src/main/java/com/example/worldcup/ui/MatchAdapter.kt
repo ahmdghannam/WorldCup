@@ -1,9 +1,10 @@
 package com.example.worldcup.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.worldcup.R
 import com.example.worldcup.data.domain.Match
@@ -12,7 +13,6 @@ import com.example.worldcup.databinding.ItemMatchBinding
 
 class MatchAdapter(private var list: List<Match>, private val listener: MatchInteractionListener) :
     RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_match, parent, false)
         return MatchViewHolder(view)
@@ -29,12 +29,19 @@ class MatchAdapter(private var list: List<Match>, private val listener: MatchInt
             tvHomeTeam.setOnClickListener { listener.onClickTeamName(currentMatch.homeTeamName) }
             tvAwayTeam.setOnClickListener { listener.onClickTeamName(currentMatch.awayTeamName) }
             root.setOnClickListener { listener.onClickItem(currentMatch) }
+            iconDelete.setOnClickListener {
+                val currentPosition = holder.adapterPosition
+                listener.deleteItemAt(currentPosition)
+            }
         }
     }
 
+
+
     fun setData(newList: List<Match>) {
+        val diffResult = DiffUtil.calculateDiff(MatchDifferentUtility(list, newList))
         list = newList
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun getItemCount() = list.size

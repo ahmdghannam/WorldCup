@@ -94,6 +94,17 @@
             app:layout_constraintStart_toEndOf="@+id/tv_away_goals"
             app:layout_constraintTop_toTopOf="@+id/tv_home_team" />
 
+
+        <ImageView
+            android:id="@+id/icon_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_delete"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

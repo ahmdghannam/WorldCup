@@ -2,6 +2,7 @@ package com.example.worldcup.ui
 
 import android.content.Intent
 import android.provider.ContactsContract.Data
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import com.example.worldcup.data.DataManager
@@ -12,7 +13,7 @@ import com.example.worldcup.util.CsvParser
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-class MainActivity : BaseActivity<ActivityMainBinding>() ,MatchInteractionListener {
+class MainActivity : BaseActivity<ActivityMainBinding>(), MatchInteractionListener {
 
     override val bindingInflater: (LayoutInflater) -> ActivityMainBinding =
         ActivityMainBinding::inflate
@@ -21,19 +22,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>() ,MatchInteractionListen
     private lateinit var adapter: MatchAdapter
     override fun setup() {
         parseFile()
-         adapter = MatchAdapter(DataManager.matches,this)
+        adapter = MatchAdapter(DataManager.matches, this)
         binding?.recyclerMatch?.adapter = adapter
     }
 
     override fun addCallBacks() {
         binding?.fab?.setOnClickListener {
-             addFinalMatch()
+            addFinalMatch()
         }
 
     }
 
     private fun addFinalMatch() {
-        val finalMatch=Match(
+        val finalMatch = Match(
             year = 2022,
             stadium = "Lusail",
             city = "doha",
@@ -43,7 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() ,MatchInteractionListen
             awayTeamGoals = 3,
             refereeName = "mamdoh"
         )
-        DataManager.addMatch(finalMatch)
+        DataManager.addMatchAt(0,finalMatch)
         adapter.setData(DataManager.matches)
     }
 
@@ -58,13 +59,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>() ,MatchInteractionListen
     }
 
     override fun onClickItem(match: Match) {
-        val myIntent= Intent(this,DetailsActivity::class.java)
-        myIntent.putExtra(Constants.Key.Match,match)
+        val myIntent = Intent(this, DetailsActivity::class.java)
+        myIntent.putExtra(Constants.Key.Match, match)
         startActivity(myIntent)
     }
 
     override fun onClickTeamName(name: String) {
         Toast.makeText(applicationContext, name, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun deleteItemAt(index: Int) {
+        val currentMatch=DataManager.matches[index]
+        Log.i("Recycler", "deleteItemAt: index =$index, current match = $currentMatch ,")
+        DataManager.deleteMatchAt(index)
+        adapter.setData(DataManager.matches)
     }
 
 }
